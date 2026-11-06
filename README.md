@@ -13,7 +13,7 @@ Now the data-pipeline is ready to be executed
 ## Usage
 ### Step 1: Query Gambling Publications ``python extract_gambling_publications.py``
 - (Optional but recommended) Add your email in the ``pyalex.config.email`` field. This improves performance and provides OpenAlex with data.
-- The query extracts the title, abstract, and keywords of gambling publications which is flatten then written to a dictionary with the OpenAlex link as the key and the title, abstract, and keywords as the value.
+- The query extracts the title, abstract, and keywords of gambling publications which are flattened and then written to a dictionary with the OpenAlex link as the key and the title, abstract, and keywords as the value.
 - **Output:** ``gambling_publications.json``
 
 ### Step 2: Classify Gambling Publications ``python classifier.py``
@@ -32,7 +32,7 @@ This pipeline uses a three-step data pipeline to identify research that sits at 
 ### 1. Gather Publications on Gambling
 First, the **OpenAlex API** is queried to retrieve a broad set of gambling-related publications.
 -   **Search Strategy:** Single word "gambling" often returns irrelevant results (e.g., "gambling on a business decision") As a result, word pairs were utilized for the query. These included terms like "problem gambling," "online casino," and "sports betting" to ensure the papers were about the gambling sector.
--   **Filters:** Query was restricted to "articles" and "reviews" published from 2010 to present day keeps the dataset relevant  
+-   **Filters:** Query was restricted to "articles" and "reviews" published from 2010 to the present day to keep the dataset relevant  
 
 ### 2. AI and ML Classification
 Using the **CSO (Computer Science Ontology) Classifier**, the gambling publications are classified on computer science topics.
