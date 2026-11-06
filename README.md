@@ -30,7 +30,7 @@ Now the data-pipeline is ready to be executed
 ## Methodology
 This pipeline uses a three-step data pipeline to identify research that sits at the intersection of Gambling and Artificial Intelligence.
 ### 1. Gather Publications on Gambling
-First, I queried the **OpenAlex API** to retrieve a broad set of gambling-related publications.
+First, the **OpenAlex API** is queried to retrieve a broad set of gambling-related publications.
 -   **Search Strategy:** Single word "gambling" often returns irrelevant results (e.g., "gambling on a business decision") As a result, word pairs were utilized for the query. These included terms like "problem gambling," "online casino," and "sports betting" to ensure the papers were about the gambling sector.
 -   **Filters:** Query was restricted to "articles" and "reviews" published from 2010 to present day keeps the dataset relevant  
 
