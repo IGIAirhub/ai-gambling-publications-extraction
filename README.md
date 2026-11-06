@@ -6,7 +6,7 @@ This repository contains a data-pipeline designed to identify academic publicati
  1. Clone the repository
  2. Download Python 3.8.19 and create a virtual environment (PyEnv)
  3. Install requirements ```pip install -r requirements.txt```
-5. One time setup for CSO Classifier ```python setupClassifier.py```
+ 4. One time setup for CSO Classifier ```python setupClassifier.py```
 
 Now the data-pipeline is ready to be executed
 
