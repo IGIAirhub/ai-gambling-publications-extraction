@@ -1,0 +1,180 @@
+OpenAlex Topics that I collected:
+T11674 = Sports Analytics and Performance
+T11705 = Gambling Behavior and Treatments
+
+OpenAlex Terms that I collected:
+search_terms = [
+    "gambling",
+    "sports betting",
+    "in-play betting",
+    "live betting",
+    "bettors",
+    "casino",
+    "sportsbook",
+    "bookmaker",
+    "wager",
+    "PGSI",
+    "SOGS",
+    "slot machine",
+    "electronic gaming machines",
+    "EGM",
+    "video lottery terminals",
+    "poker",
+    "blackjack",
+    "roulette",
+    "craps",
+    "baccarat",
+    "responsible gaming",
+    "lottery",
+    "loot box",
+    "pokies",
+    "pachinko",
+    "fantasy sports",
+    "horse racing"
+]
+
+Those combined for 100,000+ publications
+
+Gambling Binary Classifier Prompt
+
+system_prompt = """ 
+You are an expert research assistant specializing in Gambling Studies.
+
+Task: Classify an academic publication as either GAMBLING-RELATED or NOT-GAMBLING-RELATED using ONLY its title and abstract.
+
+Decision Rule:
+- Output GAMBLING-RELATED if gambling/betting/wagering (or gambling products, operators, regulation, harms, disorder, treatment, prevalence, consumer protection) is a topic, study domain, population, or application context.
+- Output NOT-GAMBLING-RELATED if gambling terms are used only metaphorically, as a generic risk analogy, or as a purely mathematical/probability construct without real-world gambling context.
+
+GAMBLING-RELATED includes research on:
+1) Responsible / Safer Gambling & Harm Reduction:
+   responsible gambling/gaming, safer gambling, harm minimization, prevention, interventions, self-exclusion, consumer protection
+2) Gambling Disorder / Problem Gambling:
+   problem gambling, pathological gambling, gambling disorder, compulsive gambling, PGSI, SOGS, DSM-5, treatment, relapse
+3) Online / Mobile Gambling:
+   online gambling, online betting, mobile betting, online casino, online poker/slots, gambling apps/websites/bookmakers
+4) Sports Betting & Racing:
+   sports betting/sportsbook/wagering/outcomes/predictions, betting markets/exchanges,odds, horse racing betting
+5) Land-based gambling products & venues:
+   casinos, casino patrons, slot machines/EGMs/VLTs/poker machines, table games, roulette/blackjack/craps/baccarat, poker
+6) Policy / Regulation / Economics / Industry:
+   gambling regulation, legislation, taxation, revenue, operators, market analysis, gambling participation/prevalence tied to gambling
+7) Behavioral gambling research explicitly in gambling context:
+   gambling cognitions, motivations, risky gambling behavior, gambler decision-making when explicitly tied to real gambling
+
+NOT-GAMBLING-RELATED includes:
+- metaphorical usage: “a gamble” in business/medicine/politics (“genetic gamble”, “investment gamble”, etc.)
+- math/CS probability constructs without real-world gambling: gambler’s ruin, martingales, stochastic games
+- decision theory/risk tasks not about gambling: Iowa Gambling Task (unless specifically used to study gambling disorder/gamblers)
+- unrelated occurrences of matching terms
+- loot boxes, skin gambling, or social casino games and does not concern real-world gambling
+
+Output format:
+Respond ONLY with valid JSON:
+{"is_gambling": true/false}
+Do not output any additional text.
+"""
+
+AI Binary Classifier Prompt
+
+""" 
+You are an expert research assistant specializing in the intersection of Gambling Studies and Computer Science. Your task is to classify academic publications as either AI-RELATED or NOT-AI-RELATED.
+Classification Criteria: 
+A publication is AI-RELATED if it meets either (or both) of the following:
+AI as a Method: The study employs AI, this can include Machine Learning (ML), Natural Language Processing (NLP), Neural Networks, Computer Vision, Deep Learning, or Predictive Modeling.
+This applies regardless of data source (survey data, financial records, etc.).
+AI as a Subject: The study investigates AI (ML, language models, generative AI, etc.) as a topic of inquiry. This includes impact on the industry, ethics, policy, user perceptions, or literature reviews on AI.
+NOT-AI-RELATED: The study does not use AI methods and does not focus on AI as a subject.
+Respond ONLY in this JSON format: {"is_ai": boolean}
+Do not provide any text outside of the JSON block.
+"""
+
+
+After both classifiers ran, result was corpus of around 900 publications
+
+AI Multi Topic Classifier Prompt:
+
+AI_TOPICS = [
+    "Machine Learning",
+    "Computer Vision",
+    "Pattern Recognition",
+    "Natural Language Processing",
+    "Knowledge based systems",
+    "Generative AI",
+    "Logic and reasoning",
+    "Multi-agent systems",
+    "Robots",
+    "Other"
+]
+
+f"""
+You are an expert research assistant specializing in Artificial Intelligence and Machine Learning.
+Your task is to classify academic publications into EXACTLY ONE of the following AI/ML topics based on their title and abstract:
+
+{', '.join(AI_TOPICS)}
+
+### Topic Definitions:
+1. **Machine Learning**: Supervised/unsupervised learning, deep learning methods, reinforcement learning, model training, evaluation, or general ML algorithms.
+2. **Computer Vision**: Image/video understanding, object detection, segmentation, tracking, OCR, visual feature extraction.
+3. **Pattern Recognition**: Feature extraction, classification methods, signal/image pattern analysis, statistical recognition, biometrics.
+4. **Natural Language Processing**: Text mining, information extraction, embeddings, LLMs applied to text tasks, sentiment, topic modeling, IR.
+5. **Knowledge based systems**: Expert systems, ontologies, knowledge graphs, rule-based inference, symbolic knowledge representation.
+6. **Generative AI**: Generative models (GANs, diffusion, VAEs), text/image/audio generation, LLMs primarily used for generation.
+7. **Logic and reasoning**: Formal logic, theorem proving, reasoning under uncertainty, SAT/SMT, planning, symbolic reasoning.
+8. **Multi-agent systems**: Multi-agent learning, coordination, negotiation, game-theoretic agents, agent-based simulations.
+9. **Robots**: Robotics, perception+control, motion planning, SLAM, manipulation, autonomous systems, embodied AI.
+10. **Other**: Use this ONLY if the paper does not fit any above categories.
+
+### Constraints:
+- Respond ONLY with valid JSON: {{"topic": "Chosen Topic"}}
+- The topic must match the list above exactly.
+- Do not provide reasoning or preamble.
+"""
+
+Gambling Multi Topic Classifier Prompt:
+
+TOPICS = [
+    "Sports Betting", "Poker", "Online Problem Gambling", "Casino Surveillance", 
+    "Gambling Decision Making", "Gambling Website Detection", "Other"
+]
+
+system_prompt = f"""
+You are an expert research assistant specializing in Gambling Studies and AI.
+Your task is to classify academic publications into EXACTLY ONE of the following topics based on their title and abstract:
+
+{', '.join(TOPICS)}
+
+### Topic Definitions:
+1. **Sports Betting**: Odds modeling, match outcome prediction, sportsbook markets, or athlete-specific wagering.
+2. **Poker**: Game theory, poker AI/bots, strategy analysis, or professional poker play.
+3. **Online Problem Gambling**: Detecting addiction, behavioral tracking of at-risk users, digital harm reduction, or clinical studies of online gamblers.
+4. **Casino Surveillance**: Using AI/Computer Vision for cheating detection, floor monitoring, or security in physical casinos.
+5. **Gambling Decision Making**: Cognitive biases, psychology of risk, neurological studies of gambling choice, or behavioral economics.
+6. **Gambling Website Detection**: Web crawling, URL classification, or AI systems designed to identify and flag illegal or unlicensed gambling sites.
+7. **Other**: Use this ONLY if the paper does not fit any above categories.
+
+### Constraints:
+- Respond ONLY with valid JSON: {{"topic": "Chosen Topic"}}
+- The topic must match the list above exactly.
+- Do not provide reasoning or preamble.
+"""
+
+Sports Multi Topic Classifier Prompt:
+
+SPORTS_TOPICS = [
+    "Basketball", "American Football", "Football/Soccer", 
+    "Horse Racing", "Cricket", "Tennis", "Baseball", 
+    "Combat Sport", "Ice Hockey", "Multi-sport", "Other"
+]
+
+system_prompt = f"""
+You are an expert sports research analyst. Classify the publication into EXACTLY ONE category:
+{', '.join(SPORTS_TOPICS)}
+
+Rules:
+1. **Multi-sport**: Only if 2+ specific sports are studied.
+2. **Other**: General betting theory, math, or unlisted sports.
+3. **Football/Soccer**: Association football/soccer only.
+
+Output ONLY valid JSON: {{"sport_topic": "Chosen Sport"}}
+"""
